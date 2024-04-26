@@ -105,6 +105,10 @@ instance EncodeM EncodeAST A.Type (Ptr FFI.Type) where
       A.MetadataType -> liftIO $ FFI.metadataTypeInContext context
       A.TokenType -> liftIO $ FFI.tokenTypeInContext context
       A.LabelType -> liftIO $ FFI.labelTypeInContext context
+      A.ScalableVectorType sz e -> do
+        e <- encodeM e
+        sz <- encodeM sz
+        liftIO $ FFI.scalableVectorType e sz
 
 instance DecodeM DecodeAST A.Type (Ptr FFI.Type) where
   decodeM t = scopeAnyCont $ do
@@ -147,6 +151,10 @@ instance DecodeM DecodeAST A.Type (Ptr FFI.Type) where
          `ap` (decodeM =<< liftIO (FFI.getElementType t))
       [typeKindP|Token|] -> return A.TokenType
       [typeKindP|Label|] -> return A.LabelType
+      [typeKindP|ScalableVector|] ->
+        return A.ScalableVectorType
+         `ap` (decodeM =<< liftIO (FFI.getVectorSize t))
+         `ap` (decodeM =<< liftIO (FFI.getElementType t))
       _ -> error $ "unhandled type kind " ++ show k
 
 createNamedType :: A.Name -> EncodeAST (Ptr FFI.Type, Maybe ShortByteString)

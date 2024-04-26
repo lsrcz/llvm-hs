@@ -42,6 +42,8 @@ data Type
   | LabelType -- only to be used as the type of block names
   -- | <http://llvm.org/docs/LangRef.html#token-type>
   | TokenType
+  -- | <http://llvm.org/docs/LangRef.html#vector-type>
+  | ScalableVectorType { nVectorElements :: Word32, elementType :: Type }
   deriving (Eq, Ord, Read, Show, Typeable, Data, Generic)
 
 -- | An abbreviation for 'VoidType'

@@ -71,6 +71,10 @@ foreign import ccall unsafe "LLVMGetPointerAddressSpace" getPointerAddressSpace 
 foreign import ccall unsafe "LLVMVectorType" vectorType ::
   Ptr Type -> CUInt -> IO (Ptr Type)
 
+-- | <https://llvm.org/doxygen/group__LLVMCCoreTypeSequential.html#gac3f357b97efc36f5eb74643e5bbe44b9>
+foreign import ccall unsafe "LLVMScalableVectorType" scalableVectorType ::
+  Ptr Type -> CUInt -> IO (Ptr Type)
+
 -- | what <http://llvm.org/doxygen/group__LLVMCCoreTypeSequential.html#gabd1666e080f693e1af0b4018005cd927>
 -- | would be if it supported 64-bit array sizes, as the C++ type does.
 foreign import ccall unsafe "LLVM_Hs_ArrayType" arrayType ::

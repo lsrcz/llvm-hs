@@ -18,6 +18,7 @@
 	macro(Vector) \
 	macro(Metadata) \
 	macro(X86_MMX) \
-	macro(Token)
+	macro(Token) \
+	macro(ScalableVector)
 
 #endif
