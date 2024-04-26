@@ -31,6 +31,7 @@ data Constant
     | Array { memberType :: Type, memberValues :: [ Constant ] }
     | Vector { memberValues :: [ Constant ] }
     | Undef { constantType :: Type }
+    | Poison { constantType :: Type }
     | BlockAddress { blockAddressFunction :: Name, blockAddressBlock :: Name }
     | GlobalReference Name
     | TokenNone

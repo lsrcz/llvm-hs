@@ -115,6 +115,11 @@ tests = testGroup "Constants" [
       C.Undef i32,
       "global i32 undef"
     ), (
+      "poison",
+      i32,
+      C.Poison i32,
+      "global i32 poison"
+    ), (
       "binop/cast",
       i64,
       C.Add False False (C.PtrToInt (C.GlobalReference (UnName 1)) i64) (C.Int 64 2),

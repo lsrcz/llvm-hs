@@ -136,6 +136,9 @@ foreign import ccall unsafe "LLVM_Hs_GetConstPredicate" getConstantFCmpPredicate
 foreign import ccall unsafe "LLVMGetUndef" constantUndef ::
   Ptr Type -> IO (Ptr Constant)
 
+foreign import ccall unsafe "LLVMGetPoison" constantPoison ::
+  Ptr Type -> IO (Ptr Constant)
+
 foreign import ccall unsafe "LLVMBlockAddress" blockAddress ::
   Ptr Value -> Ptr BasicBlock -> IO (Ptr Constant)
 

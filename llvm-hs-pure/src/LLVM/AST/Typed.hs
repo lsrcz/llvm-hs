@@ -60,6 +60,7 @@ instance Typed C.Constant where
                                  (Right t') -> return $ Right $ VectorType (fromIntegral $ length memberValues) t'
 
   typeOf (C.Undef t)     = return $ Right t
+  typeOf (C.Poison t)     = return $ Right t
   typeOf (C.BlockAddress {}) = return $ Right ptr
   typeOf (C.GlobalReference _) = return $ Right ptr
   typeOf (C.Add {..})     = typeOf operand0

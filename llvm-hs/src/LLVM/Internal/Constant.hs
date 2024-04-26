@@ -179,6 +179,7 @@ instance EncodeM EncodeAST A.Constant (Ptr FFI.Constant) where
                   "AggregateZero" -> pure (TH.varE 'FFI.constantNull)
                   "Null" -> pure (TH.varE 'FFI.constantNull)
                   "Undef" -> pure (TH.varE 'FFI.constantUndef)
+                  "Poison" -> pure (TH.varE 'FFI.constantPoison)
                   "Vector" -> pure (TH.varE 'FFI.constantVector)
                   _ -> [] -- We have already handled these values
             return $ TH.match
@@ -239,6 +240,7 @@ instance DecodeM DecodeAST A.Constant (Ptr FFI.Constant) where
           )
       [valueSubclassIdP|ConstantPointerNull|] -> return $ A.C.Null t
       [valueSubclassIdP|ConstantAggregateZero|] -> return $ A.C.AggregateZero t
+      [valueSubclassIdP|PoisonValue|] -> return $ A.C.Poison t
       [valueSubclassIdP|UndefValue|] -> return $ A.C.Undef t
       [valueSubclassIdP|BlockAddress|] ->
             return A.C.BlockAddress

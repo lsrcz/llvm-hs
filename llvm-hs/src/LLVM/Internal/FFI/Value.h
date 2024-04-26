@@ -7,6 +7,7 @@
 	macro(Function) \
 	macro(GlobalAlias) \
 	macro(GlobalVariable) \
+	macro(PoisonValue) \
 	macro(UndefValue) \
 	macro(BlockAddress) \
 	macro(ConstantExpr) \
