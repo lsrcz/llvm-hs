@@ -249,7 +249,7 @@ instance EncodeM EncodeAST A.Terminator (Ptr FFI.Instruction) where
         tb <- encodeM ty
         rb <- encodeM rd
         eb <- encodeM ed
-        let (argvs, argAttrs) = unzip args
+        let (argvs, argAttrs) = List.unzip args
         (n, argvs) <- encodeM argvs
         i <- liftIO $ FFI.buildInvoke builder tb fv argvs n rb eb s
         attrs <- encodeM $ AttributeList fAttrs rAttrs argAttrs
@@ -463,7 +463,7 @@ $(do
              return (
                FFI.upCast i,
                do
-                 let (ivs3, bs3) = unzip ivs
+                 let (ivs3, bs3) = List.unzip ivs
                  ivs3' <- encodeM ivs3
                  bs3' <- encodeM bs3
                  liftIO $ FFI.addIncoming i ivs3' bs3'
@@ -489,7 +489,7 @@ $(do
             A.functionAttributes = fAttrs
           } -> do
             fv <- encodeM f
-            let (argvs, argAttrs) = unzip args
+            let (argvs, argAttrs) = List.unzip args
             (n, argvs) <- encodeM argvs
             tb <- encodeM ty
             i <- liftIO $ FFI.buildCall builder tb fv argvs n s

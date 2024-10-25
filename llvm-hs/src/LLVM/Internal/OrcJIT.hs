@@ -8,6 +8,7 @@ import Control.Exception
 import Control.Monad.AnyCont
 import Control.Monad.IO.Class
 import Data.Bits
+import qualified Data.List as List
 import Data.IORef
 import Foreign.C.Types
 import Foreign.C.String
@@ -166,7 +167,7 @@ defineAbsoluteSymbols (JITDylib dylib) symList =
     (nsyms, symStrPtrPtr) :: (CUInt, Ptr (Ptr FFI.SymbolStringPtr)) <- encodeM symNames
     (_, symValPtrPtr) :: (CUInt, Ptr (Ptr FFI.JITEvaluatedSymbol)) <- encodeM symVals
     liftIO $ FFI.defineAbsoluteSymbols dylib nsyms symStrPtrPtr symValPtrPtr
-  where (symNames, symVals) = unzip symList
+  where (symNames, symVals) = List.unzip symList
 
 -- | Looks up an (unmangled) symbol name in the given 'JITDylib'.
 --
